@@ -1,0 +1,8 @@
+.elements__item {
+  position: relative;
+  border-radius: 10px;
+  background: #FFFFFF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
