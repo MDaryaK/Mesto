@@ -4,7 +4,8 @@
   height: 100%;
   position: fixed;
   display: none;
-  top: 0;
+  top: 7px;
+  left: 0;
   align-items: center;
   justify-content: center;
 }

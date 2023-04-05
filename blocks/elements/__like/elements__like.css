@@ -2,7 +2,8 @@
     width: 22px;
     height: 19px;
     border: 0;
-    background-color: #FFFFFF;
+    background-color: transparent;
+    ;
     transition: .5s;
     background-image: url(../../../images/Vector-hurt.svg);
     background-size: 100%;

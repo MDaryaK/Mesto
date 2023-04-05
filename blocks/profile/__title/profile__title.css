@@ -8,11 +8,20 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin-right: 18px;
+  min-width: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__title {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 425px) {
   .profile__title {
     font-size: 27px;
     line-height: 32.68px;
+    margin-right: 4px;
   }
 }

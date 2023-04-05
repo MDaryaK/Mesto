@@ -1,17 +1,16 @@
 .page {
-  width: 880px;
-
+  max-width: 880px;
   box-sizing: border-box;
 }
 
 @media screen and (max-width: 980px) {
   .page {
-    width: 581px;
+    max-width: 581px;
   }
 }
 
 @media screen and (max-width: 645px) {
   .page {
-    width: 320px;
+    max-width: 320px;
   }
 }
