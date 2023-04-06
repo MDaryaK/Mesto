@@ -9,12 +9,6 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 680px) {
-  .header {
-    width: 100%;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .header {
     padding: 28px 0;
