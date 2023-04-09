@@ -1,13 +1,11 @@
 .popup__figure {
   margin: 0;
-  max-width: 816px;
-  max-height: 540px;
-  min-width: 433px;
+  max-width: 75vw;
+  max-height: 75vh;
 }
 
 @media (max-width: 425px) {
   .popup__figure {
-    min-width: 240px;
-    max-height: 299px;
+  max-height: 299px;
   }
 }
