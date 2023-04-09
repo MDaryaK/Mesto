@@ -8,3 +8,7 @@
   object-position: center;
   background-image: url(../../../images/sky.jpg);
 }
+
+.popup__photo:hover {
+  opacity: 0.6;
+}

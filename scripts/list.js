@@ -25,21 +25,19 @@ const initialCards = [
   }
 ];
 
-const imagePopup = document.querySelector('.popup_type-photo');
+const imagePopup = document.querySelector('.popup_type_photo');
 const imagePopupPhoto = imagePopup.querySelector('.popup__photo');
 const imagePopupCaption = imagePopup.querySelector('.popup__caption');
 const imagePopupClose = imagePopup.querySelector('.popup__close');
 
 const elements = document.querySelector('.elements');
 
-const templateItem = document.querySelector('template.elements__item');
+const templateItem = document.querySelector('#card_template');
 
 // Добавление карточек в список
 
 const addNewItem = (name, link) => {
-  const tempItem = document.createElement("div");
-  tempItem.className = "elements__item";
-  tempItem.appendChild(templateItem.content.cloneNode(true));
+  const tempItem = templateItem.content.querySelector('.elements__item').cloneNode(true);
 
   const tempPhoto = tempItem.querySelector('.elements__photo');
   tempPhoto.src = link;
@@ -47,6 +45,8 @@ const addNewItem = (name, link) => {
 
   tempPhoto.addEventListener("click", () => {
     imagePopupPhoto.src = link;
+    imagePopupPhoto.alt = name;
+
     imagePopupCaption.textContent = name;
 
     imagePopup.classList.toggle("popup_opened");
@@ -82,12 +82,10 @@ imagePopupClose.addEventListener('click', () => {
 
 const addPlaceButton = document.querySelector('.profile__button');
 
-const placePopup = document.querySelector('.popup_type-place');
+const placePopup = document.querySelector('.popup_type_place');
 const placePopupClose = placePopup.querySelector('.popup__close');
 
 const placeForm = placePopup.querySelector('.form');
-
-console.log(placeForm);
 
 const placeNameInput = placeForm.querySelector('.form__box_type_name');
 const placeLinkInput = placeForm.querySelector('.form__box_type_link');
@@ -100,13 +98,9 @@ placeForm.addEventListener('submit', (e) => {
   placeNameInput.value = "";
   placeLinkInput.value = "";
 
-  placePopup.classList.toggle("popup_opened");
+  closePopup(placePopup);
 });
 
-addPlaceButton.addEventListener('click', () => {
-  placePopup.classList.toggle("popup_opened");
-});
+addPlaceButton.addEventListener('click', () => openPopup(placePopup));
 
-placePopupClose.addEventListener('click', () => {
-  placePopup.classList.toggle("popup_opened");
-});
+placePopupClose.addEventListener('click', () => closePopup(placePopup));
