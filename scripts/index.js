@@ -1,25 +1,30 @@
-//Сщздаем переменные
-const openPopup = document.querySelector('.profile__add-button');
-const closePopup = document.querySelector('.popup__close');
-const popup = document.querySelector('.popup');
-const form = document.querySelector('.form');
+//Создаем переменные
+const popup = document.querySelector('.popup__type_profile');
+
+const closePopup = popup.querySelector('.popup__close');
+
+const form = popup.querySelector('.form');
 const nameInput = form.querySelector('.form__box_type_name');
 const jobInput = form.querySelector('.form__box_type_about');
+
 const nameNew = document.querySelector('.profile__title');
 const jobNew = document.querySelector('.profile__subtitle');
 
+const openPopup = document.querySelector('.profile__add-button');
+
 // Вызываем функцию открытия кнопки
- function openPopupButton() {
+function openPopupButton() {
   popup.classList.add('popup_opened');
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
-};
+}
 openPopup.addEventListener('click', openPopupButton);
 
 //Вызываем функцию закрытия кнопки
 function closePopupButton() {
   popup.classList.remove('popup_opened');
-};
+}
+
 closePopup.addEventListener('click', closePopupButton);
 
 // Вызываем функцию кнопки "Сохранить" и внесение новых данных
@@ -29,4 +34,5 @@ function handleFormSubmit(evt) {
   jobNew.textContent = jobInput.value;
   closePopupButton();
 }
+
 form.addEventListener('submit', handleFormSubmit);

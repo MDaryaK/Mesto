@@ -29,61 +29,7 @@
         <button class="profile__button" aria-label="active" type="button"></button>
       </section>
 
-      <section class="elements">
-        <div class="elements__item">
-          <img class="elements__photo" src="./images/karachaevsk.png" alt="карачаевск">
-          <div class="elements__block">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button class="elements__trash" aria-label="active" type="button"></button>
-            <button class="elements__like" aria-label="active" type="button"></button>
-          </div>
-        </div>
-
-        <div class="elements__item">
-          <img class="elements__photo" src="./images//elbrus.png" alt="эльбрус">
-          <div class="elements__block">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button class="elements__trash" aria-label="active" type="button"></button>
-            <button class="elements__like" aria-label="active" type="button"></button>
-          </div>
-        </div>
-
-        <div class="elements__item">
-          <img class="elements__photo" src="./images/dombai.png" alt="домбай">
-          <button class="elements__trash" aria-label="active" type="button"></button>
-          <div class="elements__block">
-            <h2 class="elements__title">Домбай</h2>
-            <button class="elements__like" aria-label="active" type="button"></button>
-          </div>
-        </div>
-
-        <div class="elements__item">
-          <img class="elements__photo" src="./images//elbrus.png" alt="эльбрус">
-          <button class="elements__trash" aria-label="active" type="button"></button>
-          <div class="elements__block">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button class="elements__like elements__like_active" aria-label="active" type="button"></button>
-          </div>
-        </div>
-
-        <div class="elements__item">
-          <img class="elements__photo" src="./images/dombai.png" alt="домбай">
-          <button class="elements__trash" aria-label="active" type="button"></button>
-          <div class="elements__block">
-            <h2 class="elements__title">Домбай</h2>
-            <button class="elements__like" aria-label="active" type="button"></button>
-          </div>
-        </div>
-
-        <div class="elements__item">
-          <img class="elements__photo" src="./images/karachaevsk.png" alt="карачаевск">
-          <button class="elements__trash" aria-label="active" type="button"></button>
-          <div class="elements__block">
-            <h2 class="elements__title">Карачаево-Ч...</h2>
-            <button class="elements__like" aria-label="active" type="button"></button>
-          </div>
-        </div>
-      </section>
+      <section class="elements"></section>
     </main>
 
     <footer class="footer">
@@ -92,7 +38,7 @@
   </div>
 
 
-  <div class="popup">
+  <div class="popup popup__type_profile">
     <div class="popup__container">
       <button class="popup__close" type="button">
       </button>
@@ -101,10 +47,8 @@
           Редактировать профиль
         </h2>
         <fieldset class="form__info">
-          <input type="text" class="form__box form__box_type_name" id="form-name" placeholder="Введите имя" name="name"
-            required>
-          <input type="text" class="form__box form__box_type_about" id="form-about" placeholder="О себе" name="about"
-            required>
+          <input type="text" class="form__box form__box_type_name" placeholder="Введите имя" name="name" required>
+          <input type="text" class="form__box form__box_type_about" placeholder="О себе" name="about" required>
         </fieldset>
         <button class="form__save" type="submit">
           Сохранить
@@ -113,15 +57,15 @@
     </div>
   </div>
 
-  <div class="popup popup__type_trash">
+  <div class="popup popup__type_place">
     <div class="popup__container">
       <button class="popup__close popup__close_add-trash" type="button" aria-label="Закрыть"> </button>
-      <form action="#" class="form" name="create trash" novalidate>
+      <form action="#" class="form" name="create place" novalidate>
         <h2 class="form__title">Новое место</h2>
         <fieldset class="form__info">
-          <input type="text" class="form__box form__box_type_place" id="form-place" placeholder="Название" minlength="2"
+          <input type="text" class="form__box form__box_type_name" id="form-place" placeholder="Название" minlength="2"
             maxlength="30" required>
-          <input type="url" class="form__box form__box_type_website" id="form-web" placeholder="Ссылка на картинку"
+          <input type="url" class="form__box form__box_type_link" id="form-web" placeholder="Ссылка на картинку"
             required>
         </fieldset>
         <button class="form__save" type="submit" aria-label="Создать">Создать</button>
@@ -139,20 +83,17 @@
     </div>
   </div>
 
-  <template class="elements">
-    <div class="elements__item">
-      <img src="#" alt="#" class="elements__photo">
-      <button class="elements__trash" type="button" aria-label="Мусор">
-      </button>
-      <div class="elements__block">
-        <h2 class="elements__title"></h2>
-        <button class="elements__like" type="button" aria-label="Сердечко">
-        </button>
-      </div>
+  <template class="elements__item">
+    <img class="elements__photo" src="" alt="">
+    <div class="elements__block">
+      <h2 class="elements__title"></h2>
+      <button class="elements__trash" aria-label="active" type="button"></button>
+      <button class="elements__like" aria-label="active" type="button"></button>
     </div>
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/list.js"></script>
 
 </body>
 
