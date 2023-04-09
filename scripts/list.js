@@ -25,7 +25,7 @@ const initialCards = [
   }
 ];
 
-const imagePopup = document.querySelector('.popup__type_photo');
+const imagePopup = document.querySelector('.popup_type-photo');
 const imagePopupPhoto = imagePopup.querySelector('.popup__photo');
 const imagePopupCaption = imagePopup.querySelector('.popup__caption');
 const imagePopupClose = imagePopup.querySelector('.popup__close');
@@ -82,7 +82,7 @@ imagePopupClose.addEventListener('click', () => {
 
 const addPlaceButton = document.querySelector('.profile__button');
 
-const placePopup = document.querySelector('.popup__type_place');
+const placePopup = document.querySelector('.popup_type-place');
 const placePopupClose = placePopup.querySelector('.popup__close');
 
 const placeForm = placePopup.querySelector('.form');

@@ -1,5 +1,5 @@
 //Создаем переменные
-const popup = document.querySelector('.popup__type_profile');
+const popup = document.querySelector('.popup_type-profile');
 
 const closePopup = popup.querySelector('.popup__close');
 
