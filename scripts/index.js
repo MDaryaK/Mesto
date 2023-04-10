@@ -67,7 +67,7 @@ const addNewItem = (name, link) => {
 
     imagePopupCaption.textContent = name;
 
-    imagePopup.classList.toggle("popup_opened");
+    openPopup(imagePopup);
   });
 
   const tempTitle = tempItem.querySelector('.elements__title');
@@ -93,7 +93,7 @@ initialCards.forEach((item) => {
 // Закрытие попапа картинки на крестик
 
 imagePopupClose.addEventListener('click', () => {
-  imagePopup.classList.toggle("popup_opened");
+  closePopup(imagePopup);
 });
 
 // Открытие попапа добавления карточки
