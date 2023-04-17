@@ -28,8 +28,20 @@ function openPopupButton() {
   jobInput.value = jobNew.textContent;
 }
 
+function addPopupOutsideClickEvent(element) {
+  element.addEventListener('click', (e) => {
+    const isOutside = !e.target.closest('.popup__container');
+
+    if (isOutside) {
+      closePopup(element);
+    }
+  });
+}
+
 profileEdit.addEventListener('click', openPopupButton);
 closeEditPopup.addEventListener('click', () => closePopup(popup));
+
+addPopupOutsideClickEvent(popup);
 
 // Вызываем функцию кнопки "Сохранить" и внесение новых данных
 function handleFormSubmit(evt) {
@@ -122,3 +134,15 @@ placeForm.addEventListener('submit', (e) => {
 addPlaceButton.addEventListener('click', () => openPopup(placePopup));
 
 placePopupClose.addEventListener('click', () => closePopup(placePopup));
+
+
+addPopupOutsideClickEvent(placePopup);
+addPopupOutsideClickEvent(imagePopup);
+
+window.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closePopup(popup);
+    closePopup(placePopup);
+    closePopup(imagePopup);
+  }
+});

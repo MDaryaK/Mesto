@@ -48,7 +48,9 @@
         </h2>
         <fieldset class="form__info">
           <input type="text" class="form__box form__box_type_name" placeholder="Введите имя" name="name" required>
+          <span class="form__error form-name-error"></span>
           <input type="text" class="form__box form__box_type_about" placeholder="О себе" name="about" required>
+          <span class="form__error form-box-error"></span>
         </fieldset>
         <button class="form__save" type="submit">
           Сохранить
@@ -65,8 +67,10 @@
         <fieldset class="form__info">
           <input type="text" class="form__box form__box_type_name" id="form-place" placeholder="Название" minlength="2"
             maxlength="30" required>
+             <span class="form__error form-place-error"></span>
           <input type="url" class="form__box form__box_type_link" id="form-web" placeholder="Ссылка на картинку"
             required>
+            <span class="form__error form-web-error"></span>
         </fieldset>
         <button class="form__save" type="submit" aria-label="Создать">Создать</button>
       </form>
@@ -96,6 +100,7 @@
 
   <script src="./scripts/list.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validation.js"></script>
 
 </body>
 
