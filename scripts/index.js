@@ -12,6 +12,9 @@ const jobNew = document.querySelector('.profile__subtitle');
 
 const profileEdit = document.querySelector('.profile__add-button');
 
+const inputsFormEditProfileElement = form.querySelectorAll('.form__box');
+const buttonSubmitFormEditProfileElement = form.querySelector('.form__save');
+
 function openPopup(element) {
   element.classList.add('popup_opened');
 }
@@ -22,10 +25,12 @@ function closePopup(element) {
 
 // Вызываем функцию открытия кнопки
 function openPopupButton() {
-  openPopup(popup);
-
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
+  clearErrors(form, validation);
+  buttonState(inputsFormEditProfileElement, buttonSubmitFormEditProfileElement, validation);
+
+  openPopup(popup);
 }
 
 function addPopupOutsideClickEvent(element) {
@@ -117,6 +122,9 @@ const placePopupClose = placePopup.querySelector('.popup__close');
 
 const placeForm = placePopup.querySelector('.form');
 
+const placeFormInputs = placeForm.querySelectorAll('.form__box');
+const placeFormSubmit = placeForm.querySelector('.form__save');
+
 const placeNameInput = placeForm.querySelector('.form__box_type_name');
 const placeLinkInput = placeForm.querySelector('.form__box_type_link');
 
@@ -131,7 +139,14 @@ placeForm.addEventListener('submit', (e) => {
   closePopup(placePopup);
 });
 
-addPlaceButton.addEventListener('click', () => openPopup(placePopup));
+addPlaceButton.addEventListener('click', () => {
+
+  clearErrors(placeForm, validation);
+  buttonState(placeFormInputs, placeFormSubmit, validation);
+  placeForm.reset();
+
+  openPopup(placePopup);
+});
 
 placePopupClose.addEventListener('click', () => closePopup(placePopup));
 
