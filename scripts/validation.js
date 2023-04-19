@@ -78,6 +78,7 @@ const hasInvalidInput = ((list) => {
   return Array.from(list).some((input) => !input.validity.valid);
 });
 
+// Соостояние кнопки 
 const buttonState = (list, button, { inactiveButtonClass }) => {
   if (hasInvalidInput(list)) {
     disableButton(button, inactiveButtonClass);
