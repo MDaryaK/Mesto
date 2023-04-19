@@ -1,5 +1,5 @@
 .form__info {
-  row-gap: 5px;
+  row-gap: 0px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -14,6 +14,6 @@
 @media screen and (max-width: 425px) {
   .form__info {
     row-gap: 6px;
-    padding: 28px 22px 0 22px;
+    padding: 0 22px 0 22px;
   }
 }

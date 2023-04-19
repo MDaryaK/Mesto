@@ -27,7 +27,6 @@ function closePopup(element) {
 function openPopupButton() {
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
-
   clearErrors(form, validation);
   buttonState(inputsFormEditProfileElement, buttonSubmitFormEditProfileElement, validation);
 
