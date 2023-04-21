@@ -1,40 +1,45 @@
 //Создаем переменные
-const popup = document.querySelector('.popup_type_profile');
+const popupProfile = document.querySelector('.popup_type_profile');
 
-const closeEditPopup = popup.querySelector('.popup__close');
+const popupProfileCloseButton = popupProfile.querySelector('.popup__close');
 
-const form = popup.querySelector('.form');
-const nameInput = form.querySelector('.form__box_type_name');
-const jobInput = form.querySelector('.form__box_type_about');
+const popupProfileForm = popupProfile.querySelector('.form');
+const nameInput = popupProfileForm.querySelector('.form__box_type_name');
+const jobInput = popupProfileForm.querySelector('.form__box_type_about');
 
 const nameNew = document.querySelector('.profile__title');
 const jobNew = document.querySelector('.profile__subtitle');
 
 const profileEdit = document.querySelector('.profile__add-button');
 
-const inputsFormEditProfileElement = form.querySelectorAll('.form__box');
-const buttonSubmitFormEditProfileElement = form.querySelector('.form__save');
+const inputsFormEditProfileElement = popupProfileForm.querySelectorAll('.form__box');
+const buttonSubmitFormEditProfileElement = popupProfileForm.querySelector('.form__save');
 
 function openPopup(element) {
   element.classList.add('popup_opened');
+
+  window.addEventListener('keydown', closeByEsc);
 }
 
 function closePopup(element) {
   element.classList.remove('popup_opened');
+
+  window.removeEventListener('keydown', closeByEsc);
 }
 
 // Вызываем функцию открытия кнопки
-function openPopupButton() {
+function openPopupProfileButton() {
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
-  clearErrors(form, validation);
+
+  clearErrors(popupProfileForm, validation);
   buttonState(inputsFormEditProfileElement, buttonSubmitFormEditProfileElement, validation);
 
-  openPopup(popup);
+  openPopup(popupProfile);
 }
 
 function addPopupOutsideClickEvent(element) {
-  element.addEventListener('click', (e) => {
+  element.addEventListener('mousedown', (e) => {
     const isOutside = !e.target.closest('.popup__container');
 
     if (isOutside) {
@@ -43,20 +48,20 @@ function addPopupOutsideClickEvent(element) {
   });
 }
 
-profileEdit.addEventListener('click', openPopupButton);
-closeEditPopup.addEventListener('click', () => closePopup(popup));
+profileEdit.addEventListener('click', openPopupProfileButton);
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 
-addPopupOutsideClickEvent(popup);
+addPopupOutsideClickEvent(popupProfile);
 
 // Вызываем функцию кнопки "Сохранить" и внесение новых данных
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   nameNew.textContent = nameInput.value;
   jobNew.textContent = jobInput.value;
-  closePopup(popup);
+  closePopup(popupProfile);
 }
 
-form.addEventListener('submit', handleFormSubmit);
+popupProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 //Создаем переменные
 const imagePopup = document.querySelector('.popup_type_photo');
@@ -70,10 +75,10 @@ const templateItem = document.querySelector('#card_template');
 
 // Добавление карточек в список
 
-const addNewItem = (name, link) => {
-  const tempItem = templateItem.content.querySelector('.elements__item').cloneNode(true);
+const createCard = (name, link) => {
+  const tempCard = templateItem.content.querySelector('.elements__item').cloneNode(true);
 
-  const tempPhoto = tempItem.querySelector('.elements__photo');
+  const tempPhoto = tempCard.querySelector('.elements__photo');
   tempPhoto.src = link;
   tempPhoto.alt = name;
 
@@ -86,24 +91,24 @@ const addNewItem = (name, link) => {
     openPopup(imagePopup);
   });
 
-  const tempTitle = tempItem.querySelector('.elements__title');
+  const tempTitle = tempCard.querySelector('.elements__title');
   tempTitle.textContent = name;
 
-  const tempTrash = tempItem.querySelector('.elements__trash');
+  const tempTrash = tempCard.querySelector('.elements__trash');
   tempTrash.addEventListener("click", () => {
-    tempItem.remove();
+    tempCard.remove();
   });
 
-  const tempLike = tempItem.querySelector('.elements__like');
+  const tempLike = tempCard.querySelector('.elements__like');
   tempLike.addEventListener("click", () => {
     tempLike.classList.toggle("elements__like_active");
   });
 
-  return tempItem;
+  return tempCard;
 };
 
 initialCards.forEach((item) => {
-  elements.appendChild(addNewItem(item.name, item.link));
+  elements.appendChild(createCard(item.name, item.link));
 });
 
 // Закрытие попапа картинки на крестик
@@ -130,7 +135,7 @@ const placeLinkInput = placeForm.querySelector('.form__box_type_link');
 placeForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  elements.prepend(addNewItem(placeNameInput.value, placeLinkInput.value));
+  elements.prepend(createCard(placeNameInput.value, placeLinkInput.value));
 
   placeNameInput.value = "";
   placeLinkInput.value = "";
@@ -152,11 +157,10 @@ placePopupClose.addEventListener('click', () => closePopup(placePopup));
 addPopupOutsideClickEvent(placePopup);
 addPopupOutsideClickEvent(imagePopup);
 
-window.addEventListener('keydown', event => {
+function closeByEsc(event) {
   if (event.key === 'Escape') {
-    closePopup(popup);
-    closePopup(placePopup);
-    closePopup(imagePopup);
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
-});
+}
 
