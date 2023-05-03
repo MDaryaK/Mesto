@@ -1,6 +1,6 @@
-import { initialCards } from './scripts/list.js';
-import Card from './scripts/card.js';
-import FormValidator from './scripts/FormValidator.js';
+import { initialCards } from '../scripts/list.js';
+import Card from '../scripts/card.js';
+import FormValidator from '../scripts/FormValidator.js';
 
 //Создаем переменные
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -77,11 +77,20 @@ const elements = document.querySelector('.elements');
 
 const templateItem = document.querySelector('#card_template');
 
+const validation = {
+  formSelector: '.form',
+  inputSelector: '.form__box',
+  submitButtonSelector: '.form__save',
+  inactiveButtonClass: 'form__save_inactive',
+  inputErrorClass: 'form__box_error',
+  errorClass: 'form__error_active'
+};
 
 // Добавление массива карточек
 
 initialCards.forEach((item) => {
-  elements.appendChild(createCard(item.name, item.link));
+  const card = new Card(templateItem, item.name, item.link);
+  elements.appendChild(card.create());
 });
 
 // Закрытие попапа картинки на крестик
