@@ -1,3 +1,7 @@
+import { initialCards } from './scripts/list.js';
+import Card from './scripts/card.js';
+import FormValidator from './scripts/FormValidator.js';
+
 //Создаем переменные
 const popupProfile = document.querySelector('.popup_type_profile');
 
@@ -73,39 +77,8 @@ const elements = document.querySelector('.elements');
 
 const templateItem = document.querySelector('#card_template');
 
-// Добавление карточек в список
 
-const createCard = (name, link) => {
-  const tempCard = templateItem.content.querySelector('.elements__item').cloneNode(true);
-
-  const tempPhoto = tempCard.querySelector('.elements__photo');
-  tempPhoto.src = link;
-  tempPhoto.alt = name;
-
-  tempPhoto.addEventListener("click", () => {
-    imagePopupPhoto.src = link;
-    imagePopupPhoto.alt = name;
-
-    imagePopupCaption.textContent = name;
-
-    openPopup(imagePopup);
-  });
-
-  const tempTitle = tempCard.querySelector('.elements__title');
-  tempTitle.textContent = name;
-
-  const tempTrash = tempCard.querySelector('.elements__trash');
-  tempTrash.addEventListener("click", () => {
-    tempCard.remove();
-  });
-
-  const tempLike = tempCard.querySelector('.elements__like');
-  tempLike.addEventListener("click", () => {
-    tempLike.classList.toggle("elements__like_active");
-  });
-
-  return tempCard;
-};
+// Добавление массива карточек
 
 initialCards.forEach((item) => {
   elements.appendChild(createCard(item.name, item.link));
@@ -157,6 +130,7 @@ placePopupClose.addEventListener('click', () => closePopup(placePopup));
 addPopupOutsideClickEvent(placePopup);
 addPopupOutsideClickEvent(imagePopup);
 
+// Функция закрытия попапа по клику на esc
 function closeByEsc(event) {
   if (event.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
