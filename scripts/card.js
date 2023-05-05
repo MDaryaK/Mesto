@@ -1,3 +1,5 @@
+import {imagePopup, imagePopupCaption, imagePopupPhoto, openPopup} from "./index.js";
+
 // Добавление карточек в список
 class Card {
   constructor(template, name, link) {
@@ -38,10 +40,10 @@ class Card {
   }
 
   _onPhotoClick() {
-    imagePopupPhoto.src = this._link;
-    imagePopupPhoto.alt = this._name;
+    this._imagePopupPhoto.src = this._link;
+    this._imagePopupPhoto.alt = this._name;
 
-    imagePopupCaption.textContent = this._name;
+    this._imagePopupCaption.textContent = this._name;
 
     openPopup(imagePopup);
   }

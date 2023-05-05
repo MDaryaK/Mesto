@@ -72,7 +72,7 @@
    }
 
    _hasInvalidInput() {
-     return Array.from(this._list).some((input) => !input.validity.valid);
+     return Array.from(this._inputs).some((input) => !input.validity.valid);
    };
 
    // Соостояние кнопки (внутренний метод)
@@ -87,14 +87,14 @@
 
    //Кнопка активна(внутренний метод)
    _enableButton() {
-     this._button.classList.remove(this._buttonClass);
-     this._button.removeAttribute('disabled');
+     this._submit.classList.remove(this._inactiveButtonClass);
+     this._submit.removeAttribute('disabled');
    };
 
    //Кнопка пассивна(внутренний метод)
    _disableButton() {
-     this._button.classList.add(this._buttonClass);
-     this._button.setAttribute('disabled', true);
+     this._submit.classList.add(this._inactiveButtonClass);
+     this._submit.setAttribute('disabled', true);
    };
  }
 

@@ -1,6 +1,6 @@
-import { initialCards } from '../scripts/list.js';
-import Card from '../scripts/card.js';
-import FormValidator from '../scripts/FormValidator.js';
+import { initialCards } from './List.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 //Создаем переменные
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -19,7 +19,7 @@ const profileEdit = document.querySelector('.profile__add-button');
 const inputsFormEditProfileElement = popupProfileForm.querySelectorAll('.form__box');
 const buttonSubmitFormEditProfileElement = popupProfileForm.querySelector('.form__save');
 
-function openPopup(element) {
+export function openPopup(element) {
   element.classList.add('popup_opened');
 
   window.addEventListener('keydown', closeByEsc);
@@ -36,8 +36,7 @@ function openPopupProfileButton() {
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
 
-  clearErrors(popupProfileForm, validation);
-  buttonState(inputsFormEditProfileElement, buttonSubmitFormEditProfileElement, validation);
+  formValidatorProfile.clearErrors();
 
   openPopup(popupProfile);
 }
@@ -68,23 +67,15 @@ function handleProfileFormSubmit(evt) {
 popupProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 //Создаем переменные
-const imagePopup = document.querySelector('.popup_type_photo');
-const imagePopupPhoto = imagePopup.querySelector('.popup__photo');
-const imagePopupCaption = imagePopup.querySelector('.popup__caption');
+export const imagePopup = document.querySelector('.popup_type_photo');
+export const imagePopupPhoto = imagePopup.querySelector('.popup__photo');
+export const imagePopupCaption = imagePopup.querySelector('.popup__caption');
 const imagePopupClose = imagePopup.querySelector('.popup__close');
 
 const elements = document.querySelector('.elements');
 
 const templateItem = document.querySelector('#card_template');
 
-const validation = {
-  formSelector: '.form',
-  inputSelector: '.form__box',
-  submitButtonSelector: '.form__save',
-  inactiveButtonClass: 'form__save_inactive',
-  inputErrorClass: 'form__box_error',
-  errorClass: 'form__error_active'
-};
 
 // Добавление массива карточек
 
@@ -126,9 +117,8 @@ placeForm.addEventListener('submit', (e) => {
 });
 
 addPlaceButton.addEventListener('click', () => {
-  clearErrors(placeForm, validation);
-  buttonState(placeFormInputs, placeFormSubmit, validation);
-
+  formValidatorCard.clearErrors();
+  
   placeForm.reset();
 
   openPopup(placePopup);
@@ -146,4 +136,19 @@ function closeByEsc(event) {
     closePopup(openedPopup);
   }
 }
+
+const validation = {
+  formSelector: '.form',
+  inputSelector: '.form__box',
+  submitButtonSelector: '.form__save',
+  inactiveButtonClass: 'form__save_inactive',
+  inputErrorClass: 'form__box_error',
+  errorClass: 'form__error_active'
+};
+
+const formValidatorProfile = new FormValidator(validation, popupProfileForm);
+formValidatorProfile.enableValidation();
+
+const formValidatorCard = new FormValidator(validation, placeForm);
+formValidatorCard.enableValidation();
 
