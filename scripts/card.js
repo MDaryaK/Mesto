@@ -40,10 +40,10 @@ class Card {
   }
 
   _onPhotoClick() {
-    this._imagePopupPhoto.src = this._link;
-    this._imagePopupPhoto.alt = this._name;
+    imagePopupPhoto.src = this._link;
+    imagePopupPhoto.alt = this._name;
 
-    this._imagePopupCaption.textContent = this._name;
+    imagePopupCaption.textContent = this._name;
 
     openPopup(imagePopup);
   }
