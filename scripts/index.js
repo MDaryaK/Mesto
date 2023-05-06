@@ -1,5 +1,5 @@
-import { initialCards } from './List.js';
-import Card from './Card.js';
+import { initialCards } from './Hak1.js';
+import Card from './Hak.js';
 import FormValidator from "./FormValidator.js";
 
 const popupProfile = document.querySelector('.popup_type_profile');
