@@ -1,6 +1,5 @@
 import {imagePopup, imagePopupCaption, imagePopupPhoto, openPopup} from "./index.js";
 
-// Добавление карточек в список
 class Card {
   constructor(template, name, link) {
     this._name = name;
@@ -17,8 +16,6 @@ class Card {
     this._photo.src = this._link;
     this._photo.alt = this._name;
 
-    this._photo.addEventListener("click", () => this._onPhotoClick());
-
     this._title.textContent = this._name;
 
     this._addEventListeners();
@@ -27,6 +24,7 @@ class Card {
   }
 
   _addEventListeners() {
+    this._photo.addEventListener("click", () => this._onPhotoClick());
     this._trash.addEventListener("click", () => this._onTrashClick());
     this._like.addEventListener("click", () => this._onLikeClick());
   }
