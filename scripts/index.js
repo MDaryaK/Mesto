@@ -1,4 +1,4 @@
-import { initialCards } from './hak.js';
+import { initialCards } from './list.js';
 import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
 
