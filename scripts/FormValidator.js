@@ -24,7 +24,7 @@ class FormValidator {
       element.classList.remove(this._errorClass);
     });
 
-    this.inputs.forEach(element => {
+    this._inputs.forEach(element => {
       element.classList.remove(this._inputErrorClass);
     });
 
