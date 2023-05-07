@@ -20,11 +20,11 @@ class FormValidator {
 
   //Очитска поля ввода(внешний метод)
   clearErrors = () => {
-    this._form.querySelectorAll(`.${this._errorClass}`).forEach(element => {
+    this._errors.forEach(element => {
       element.classList.remove(this._errorClass);
     });
 
-    this._form.querySelectorAll(`.${this._inputErrorClass}`).forEach(element => {
+    this.inputs.forEach(element => {
       element.classList.remove(this._inputErrorClass);
     });
 
@@ -72,7 +72,7 @@ class FormValidator {
   }
 
   _hasInvalidInput() {
-    return Array.from(this._inputs).some((input) => !input.validity.valid);
+    return this._inputs.some((input) => !input.validity.valid);
   };
 
   // Соостояние кнопки (внутренний метод)

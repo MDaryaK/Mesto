@@ -1,4 +1,4 @@
-import { initialCards } from './List.js';
+import { initialCards } from './list.js';
 import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
 
@@ -48,6 +48,13 @@ function addPopupOutsideClickEvent(element) {
   });
 }
 
+
+function createCard(template, name, link) {
+  const card = new Card(template, name, link);
+  return card.create();
+}
+
+
 profileEdit.addEventListener('click', openPopupProfileButton);
 
 addPopupOutsideClickEvent(popupProfile);
@@ -74,8 +81,7 @@ const templateItem = document.querySelector('#card_template');
 // Добавление карточек в список
 
 initialCards.forEach((item) => {
-  const card = new Card(templateItem, item.name, item.link);
-  elements.appendChild(card.create());
+  elements.appendChild(createCard(templateItem, item.name, item.link));
 });
 
 // Открытие попапа добавления карточки
@@ -92,11 +98,9 @@ const placeLinkInput = placeForm.querySelector('.form__box_type_link');
 placeForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const card = new Card(templateItem, placeNameInput.value, placeLinkInput.value);
-  elements.prepend(card.create());
+  elements.prepend(createCard(templateItem, placeNameInput.value, placeLinkInput.value));
 
-  placeNameInput.value = "";
-  placeLinkInput.value = "";
+  placeForm.reset();
 
   closePopup(placePopup);
 });
