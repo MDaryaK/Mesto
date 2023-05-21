@@ -1,7 +1,5 @@
-import {imagePopup, imagePopupCaption, imagePopupPhoto, openPopup} from "./index.js";
-
 class Card {
-  constructor(template, name, link) {
+  constructor({ template, name, link }, handleCardClick ) {
     this._name = name;
     this._link = link;
 
@@ -10,6 +8,8 @@ class Card {
     this._trash = this._card.querySelector('.elements__trash');
     this._title = this._card.querySelector('.elements__title');
     this._photo = this._card.querySelector('.elements__photo');
+
+    this.handleCardClick = handleCardClick;
   }
 
   create() {
@@ -24,7 +24,7 @@ class Card {
   }
 
   _addEventListeners() {
-    this._photo.addEventListener("click", () => this._onPhotoClick());
+    this._photo.addEventListener("click", () => this.handleCardClick());
     this._trash.addEventListener("click", () => this._onTrashClick());
     this._like.addEventListener("click", () => this._onLikeClick());
   }
@@ -35,15 +35,6 @@ class Card {
 
   _onLikeClick() {
     this._like.classList.toggle("elements__like_active")
-  }
-
-  _onPhotoClick() {
-    imagePopupPhoto.src = this._link;
-    imagePopupPhoto.alt = this._name;
-
-    imagePopupCaption.textContent = this._name;
-
-    openPopup(imagePopup);
   }
 }
 

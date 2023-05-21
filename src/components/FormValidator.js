@@ -20,11 +20,11 @@ class FormValidator {
 
   //Очитска поля ввода(внешний метод)
   clearErrors = () => {
-    this._errors.forEach(element => {
+    this._form.querySelectorAll(`.${this._errorClass}`).forEach(element => {
       element.classList.remove(this._errorClass);
     });
 
-    this._inputs.forEach(element => {
+    this._form.querySelectorAll(`.${this._inputErrorClass}`).forEach(element => {
       element.classList.remove(this._inputErrorClass);
     });
 
