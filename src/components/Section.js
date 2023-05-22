@@ -1,20 +1,18 @@
 class Section {
 
-  constructor({ elements, render }, box) {
+  constructor({ elements, render }, container) {
     this._elements = elements;
-    this._render = render;
-    this._box = box;
+    this._renderer = render;
+    this._container = container;
   }
 
   renderElements() {
-    this._elements.forEach((item) => {
-      const card = this._render(item);
-      this._box.append(card);
-    });
+    this._elements.forEach((item) => this._renderer(item));
+    
   }
 
   addItem(item) {
-    this._box.prepend(item);
+    this._container.prepend(item);
   }
 }
 

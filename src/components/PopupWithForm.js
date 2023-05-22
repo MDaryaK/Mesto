@@ -12,7 +12,10 @@ class PopupWithForm extends Popup {
   _getInputValues() {
     const inputList = this._formIntoPopup.querySelectorAll('.form__field');
 
-    return Array.from(inputList).map((input) => input.value)
+    return Array.from(inputList).reduce((formData, input) => {
+      formData[input.name] = input.value;
+      return formData;
+    }, {})
   }
 
   setEventListeners() {

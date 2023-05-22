@@ -1,11 +1,11 @@
-import './pages/index.css';
-import { initialCards } from './scripts/list.js';
-import Card from './components/Card.js';
-import FormValidator from "./components/FormValidator.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import Section from "./components/Section.js";
-import UserInfo from "./components/UserInfo.js";
+import './index.css';
+import { initialCards } from '../scripts/list.js';
+import Card from '../components/Card.js';
+import FormValidator from "../components/FormValidator.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 
 const popupProfile = document.querySelector('.popup_type_profile');
 
@@ -71,7 +71,7 @@ editProfilePopup.setEventListeners();
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
 
 function submitCreatePlace() {
-  elements.prepend(createCard({ name: placeNameInput.value, link: placeLinkInput.value }));
+  section.addItem(createCard({ name: placeNameInput.value, link: placeLinkInput.value }));
 
   createPlacePopup.close();
 }
@@ -94,7 +94,7 @@ function createCard({ name, link }) {
 }
 
 function handleCardClick() {
-  imagePopup.openPopup(this._name, this._link);
+  imagePopup.open(this._name, this._link);
 }
 
 // добавление массива карточек
