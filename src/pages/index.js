@@ -1,11 +1,11 @@
-import './index.css';
-import { initialCards } from '../scripts/list.js';
-import Card from '../components/Card.js';
-import FormValidator from "../components/FormValidator.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import Section from "../components/Section.js";
-import UserInfo from "../components/UserInfo.js";
+import Card from './Card.js';
+import FormValidator from "./validate.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import Section from "./Section.js";
+import UserInfo from "./UserInfo.js";
+import Api from "./Api.js";
+import PopupRemoveCard from "./PopupRemoveCard.js";
 
 const popupProfile = document.querySelector('.popup_type_profile');
 
@@ -24,6 +24,14 @@ const placeForm = placePopup.querySelector('.form');
 
 const placeNameInput = placeForm.querySelector('.form__box_type_name');
 const placeLinkInput = placeForm.querySelector('.form__box_type_link');
+
+const api = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/cohort-68',
+  headers: {
+    authorization: 'd04afa61-1239-4cd9-8e4f-6ea23509e870',
+    'Content-Type': 'application/json'
+  }
+});
 
 addPlaceButton.addEventListener('click', () => {
   formValidatorCard.clearErrors();
@@ -68,19 +76,62 @@ createPlacePopup.setEventListeners();
 const editProfilePopup = new PopupWithForm('.popup_type_profile', submitEditProfile);
 editProfilePopup.setEventListeners();
 
-const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
+const deletePhotoPopup = new PopupRemoveCard('.popup_type_delete', ({ card, cardId }) => {
+  api.deleteCard(cardId)
+    .then(() => {
+      card.deleteCard();
+      deletePhotoPopup.close();
+    })
+    .catch(errorMessage => {
+      console.error(errorMessage)
+    })
+});
+deletePhotoPopup.setEventListeners();
+
+const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__photo');
 
 function submitCreatePlace() {
-  section.addItem(createCard({ name: placeNameInput.value, link: placeLinkInput.value }));
-
-  createPlacePopup.close();
+  api.createNewCard({ name: placeNameInput.value, link: placeLinkInput.value })
+    .then((newCard) => {
+      section.addItem(createCard(newCard));
+      createPlacePopup.close();
+    })
+    .catch(errorMessage => {
+      console.error(errorMessage);
+    });
 }
 
 function submitEditProfile() {
-  userInfo.setUserInfo({ name: nameInput.value, job: jobInput.value });
-
-  editProfilePopup.close();
+  api.setUserInfo({ name: nameInput.value, job: jobInput.value })
+    .then(res => {
+      userInfo.setUserInfo({ name: res.name, job: res.about, avatar: res.avatar, id: res._id });
+      editProfilePopup.close();
+    })
+    .catch(errorMessage => {
+      console.error(errorMessage);
+    });
 }
+
+const handleLikeCard = (card, itemLike, cardId) => {
+  if (itemLike.classList.contains('elements__like_active')) {
+    api.deleteLike(cardId)
+      .then(res => {
+        card.isLike(res.likes);
+      })
+      .catch(errorMessage => {
+        console.error(errorMessage)
+      });
+  } else {
+    api.addLike(cardId)
+      .then(res => {
+        card.isLike(res.likes);
+      })
+      .catch(errorMessage => {
+        console.error(errorMessage);
+      });
+  }
+
+};
 
 // Рендер карточек
 
@@ -88,8 +139,8 @@ const elements = document.querySelector('.elements');
 
 const templateItem = document.querySelector('#card_template');
 
-function createCard({ name, link }) {
-  const card = new Card({ template: templateItem, name, link }, handleCardClick);
+function createCard(data) {
+  const card = new Card(templateItem,data, handleCardClick, deletePhotoPopup.open, userInfo.getUserId(), handleLikeCard);
   return card.create();
 }
 
@@ -97,12 +148,17 @@ function handleCardClick() {
   imagePopup.open(this._name, this._link);
 }
 
-// добавление массива карточек
-const section = new Section({
-  elements: initialCards,
-  render: (item) => {
-    section.addItem(createCard(item));
-  }
-}, elements);
+const rendererItems = (item) => {
+  section.addItem(createCard(item));
+};
 
-section.renderElements();
+const section = new Section(rendererItems, elements);
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userInfo.setUserInfo({ name: user.name, job: user.about, avatar: user.avatar, id: user._id });
+    section.rendererElements(cards.reverse());
+  })
+  .catch(errorMessage => {
+    console.error(errorMessage);
+  });

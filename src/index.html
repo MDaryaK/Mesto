@@ -65,10 +65,10 @@
       <form action="#" class="form" name="create place" novalidate>
         <h2 class="form__title">Новое место</h2>
         <fieldset class="form__info">
-          <input type="text" class="form__box form__box_type_name" id="form-place" placeholder="Название" minlength="2"
+          <input type="text" class="form__box form__box_type_name" id="form-place" name="place" placeholder="Название" minlength="2"
             maxlength="30" required>
           <span class="form__error form-place-error form__error_active">Вы пропустили это поле</span>
-          <input type="url" class="form__box form__box_type_link" id="form-web" placeholder="Ссылка на картинку"
+          <input type="url" class="form__box form__box_type_link" id="form-web" name="web" placeholder="Ссылка на картинку"
             required>
           <span class="form__error form-web-error form__error_active">Введите адрес сайта</span>
         </fieldset>
@@ -87,6 +87,32 @@
     </div>
   </div>
 
+  <div class="popup popup_type_delete">
+    <div class="popup__delete-container">
+      <button class="popup__close popup__close_type-delete" type="button"
+        aria-label="Закрыть"></button>
+      <form action="#" class="form" name="Удаление карточки" novalidate>
+      <h2 class="form__title">Вы уверены?</h2>
+        <button class="form__save" type="submit" aria-label="Да">Да</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_avatar">
+    <div class="popup__avatar-container">
+      <button class="popup__close popup__close_type-avatar popup__close_add_img" type="button" aria-label="Закрыть"></button>
+      <form action="#" class="form" name="Изменение аватара" novalidate>
+      <h2 class="form__title">Обновить аватар</h2>
+        <fieldset class="form__info">
+          <input type="url" class="form__box form__box_type_link" id="form-src" name="src" placeholder="Ссылка на картинку"
+            required>
+          <span class="form__error form-web-error form__error_active"></span>
+        </fieldset>
+        <button class="form__submit" type="submit" aria-label="Сохранить">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <template id="card_template">
     <div class="elements__item">
       <img class="elements__photo" src="#" alt="#">
@@ -94,6 +120,7 @@
         <h2 class="elements__title"></h2>
         <button class="elements__trash" aria-label="active" type="button"></button>
         <button class="elements__like" aria-label="active" type="button"></button>
+        <div class="elements__counter"></div>
       </div>
     </div>
   </template>
