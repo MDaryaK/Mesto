@@ -1,5 +1,4 @@
 import Popup from "./Popup.js";
-
 class PopupWithForm extends Popup {
   constructor(popup, callbackSubmit) {
     super(popup);
@@ -10,7 +9,7 @@ class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    const inputList = this._formIntoPopup.querySelectorAll('.form__field');
+    const inputList = this._formIntoPopup.querySelectorAll('.form__box');
 
     return Array.from(inputList).reduce((formData, input) => {
       formData[input.name] = input.value;
@@ -32,5 +31,6 @@ class PopupWithForm extends Popup {
     this._formIntoPopup.reset();
   }
 }
+
 
 export default PopupWithForm;

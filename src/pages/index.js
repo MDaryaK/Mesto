@@ -22,6 +22,8 @@ const addPlaceButton = document.querySelector('.profile__button');
 
 const placePopup = document.querySelector('.popup_type_place');
 
+const editAvatarButton = document.querySelector('.profile__avatar-button');
+
 const placeForm = placePopup.querySelector('.form');
 
 const placeNameInput = placeForm.querySelector('.form__box_type_name');
@@ -63,6 +65,17 @@ const validation = {
   errorClass: 'form__error_active'
 };
 
+const submitChangeAvatar = (data) => {
+  api.updateUserAvatar(data)
+    .then(res => {
+      userInfo.setUserInfo({ name: res.name, job: res.about, avatar: res.avatar, id: res._id });
+      editAvatarPopup.close();
+    })
+    .catch(errorMessage => {
+      console.error(errorMessage);
+    });
+};
+
 const formValidatorProfile = new FormValidator(validation, popupProfileForm);
 formValidatorProfile.enableValidation();
 
@@ -77,6 +90,11 @@ createPlacePopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm('.popup_type_profile', submitEditProfile);
 editProfilePopup.setEventListeners();
+
+const editAvatarPopup = new PopupWithForm('.popup_type_avatar', submitChangeAvatar);
+editAvatarPopup.setEventListeners();
+
+editAvatarButton.addEventListener('click', () => editAvatarPopup.open());
 
 const deletePhotoPopup = new PopupRemoveCard('.popup_type_delete', ({ card, cardId }) => {
   api.deleteCard(cardId)
