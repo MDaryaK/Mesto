@@ -1,17 +1,20 @@
 import Popup from "./Popup.js";
 class PopupWithForm extends Popup {
-  constructor(popup, callbackSubmit) {
+  constructor(popup) {
     super(popup);
 
-    this._callbackSubmit = callbackSubmit;
     this._currentPopup = document.querySelector(popup);
     this._formIntoPopup = this._currentPopup.querySelector('.form');
+    this._inputList = this._formIntoPopup.querySelectorAll('.form__box');
+    this._buttonSubmit = this._currentPopup.querySelector('.form__save');
+  }
+
+  setCallback(submitCb) {
+    this._callbackSubmit = submitCb;
   }
 
   _getInputValues() {
-    const inputList = this._formIntoPopup.querySelectorAll('.form__box');
-
-    return Array.from(inputList).reduce((formData, input) => {
+    return Array.from(this._inputList).reduce((formData, input) => {
       formData[input.name] = input.value;
       return formData;
     }, {})
@@ -26,11 +29,14 @@ class PopupWithForm extends Popup {
     });
   }
 
+  setSubmitButtonText(text) {
+    this._buttonSubmit.textContent = text;
+  }
+
   close() {
     super.close();
     this._formIntoPopup.reset();
   }
 }
-
 
 export default PopupWithForm;
